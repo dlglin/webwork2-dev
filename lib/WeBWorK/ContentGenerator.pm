@@ -729,7 +729,11 @@ sub links {
 					if $ce->{showeditors}->{homeworkseteditor1};
 				print "<br/>";
 				print &$makelink("${pfx}ProblemSetList2", urlpath_args=>{%args}, systemlink_args=>\%systemlink_args)
-					if $ce->{showeditors}->{homeworkseteditor2};;
+					if $ce->{showeditors}->{homeworkseteditor2};
+				print "<br/>";
+				print &$makelink("${pfx}ProblemSetList3", urlpath_args=>{%args}, systemlink_args=>\%systemlink_args)
+					if $ce->{showeditors}->{homeworkseteditor3};
+				
 				
 				## only show editor link for non-versioned sets
 				if (defined $setID && $setID !~ /,v\d+$/ ) {
@@ -767,6 +771,8 @@ sub links {
 					if $ce->{showeditors}->{librarybrowser2};
 				print CGI::li(&$makelink("${pfx}SetMaker3", text=>$r->maketext("Library Browser 3"), urlpath_args=>{%args}, systemlink_args=>\%systemlink_args))
 					if $ce->{showeditors}->{librarybrowser3};
+				print CGI::li(&$makelink("${pfx}SetMakernojs", text=>$r->maketext("Orig. Lib. Browser"), urlpath_args=>{%args}, systemlink_args=>\%systemlink_args))
+					if $ce->{showeditors}->{librarybrowsernojs};
 #print CGI::li(&$makelink("${pfx}Compare", text=>"Compare", urlpath_args=>{%args}, systemlink_args=>\%systemlink_args));
 				print CGI::start_li(); # Stats
 				print &$makelink("${pfx}Stats", urlpath_args=>{%args}, systemlink_args=>\%systemlink_args);

@@ -86,6 +86,12 @@ PLEASE FOR THE LOVE OF GOD UPDATE THIS IF YOU CHANGE THE HEIRARCHY BELOW!!!
  instructor_users_assigned_to_set2    /$courseID/instructor/sets2/$setID/users/ #not created yet
 
  instructor_problem_grader                /$courseID/instructor/grader/$setID/$problemID
+
+
+ instructor_set_list3                 /$courseID/instructor/sets3/
+ instructor_set_detail3               /$courseID/instructor/sets3/$setID/ #not created yet
+ instructor_users_assigned_to_set3    /$courseID/instructor/sets3/$setID/users/ #not created yet
+
  
  instructor_add_users                /$courseID/instructor/add_users/
  instructor_set_assigner             /$courseID/instructor/assigner/
@@ -94,6 +100,7 @@ PLEASE FOR THE LOVE OF GOD UPDATE THIS IF YOU CHANGE THE HEIRARCHY BELOW!!!
  instructor_set_maker                /$courseID/instructor/setmaker/
  instructor_set_maker2               /$courseID/instructor/setmaker2/
  instructor_set_maker3               /$courseID/instructor/setmaker3/
+ instructor_set_maker_no_js          /$courseID/instructor/setmakernojs/
  instructor_get_target_set_problems  /$courseID/instructor/GetTargetSetProblems/
  instructor_get_library_set_problems /$courseID/instructor/GetLibrarySetProblems/
  instructor_config                   /$courseID/instructor/config/
@@ -322,11 +329,11 @@ our %pathTypes = (
 	instructor_tools => {
 		name    => 'Instructor Tools',
 		parent  => 'set_list',
-		kids    => [ qw/instructor_user_list instructor_user_list2 instructor_user_list3 instructor_set_list instructor_set_list2
+		kids    => [ qw/instructor_user_list instructor_user_list2 instructor_user_list3 instructor_set_list instructor_set_list2 instructor_set_list3
 		    instructor_add_users instructor_achievement_list 
 			instructor_set_assigner instructor_file_manager
 			instructor_problem_editor instructor_problem_editor2 instructor_problem_editor3
-			instructor_set_maker instructor_set_maker2 instructor_set_maker3 
+			instructor_set_maker instructor_set_maker_no_js instructor_set_maker2 instructor_set_maker3 
 			instructor_get_target_set_problems instructor_get_library_set_problems instructor_compare
 			instructor_config
 			instructor_scoring instructor_scoring_download instructor_mail_merge
@@ -408,6 +415,18 @@ our %pathTypes = (
 		produce => 'sets2/',
 		display => 'WeBWorK::ContentGenerator::Instructor::ProblemSetList2',
 	},
+
+	instructor_set_list3 => {
+		name    => 'Homework Manager',
+		parent  => 'instructor_tools',
+		kids    => [ qw/instructor_set_detail/ ],
+		match   => qr|^sets3/|,
+		capture => [ qw// ],
+		produce => 'sets3/',
+		display => 'WeBWorK::ContentGenerator::Instructor::ProblemSetList3',
+	},
+
+	
 	instructor_set_detail => {
 		name    => 'Set Detail for set $setID',
 		parent  => 'instructor_set_list',
@@ -485,6 +504,15 @@ our %pathTypes = (
 		capture => [ qw// ],
 		produce => 'setmaker/',
 		display => 'WeBWorK::ContentGenerator::Instructor::SetMaker',
+	},
+	instructor_set_maker_no_js => {
+		name    => 'Library Browser no js',
+		parent  => 'instructor_tools',
+		kids    => [ qw// ],
+		match   => qr|^setmakernojs/|,
+		capture => [ qw// ],
+		produce => 'setmakernojs/',
+		display => 'WeBWorK::ContentGenerator::Instructor::SetMakernojs',
 	},
 	instructor_set_maker2 => {
 		name    => 'Library Browser 2',
